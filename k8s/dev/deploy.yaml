@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name:  api
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi
+  namespace: api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: fastapi
+  template:
+    metadata:
+      labels:
+        app: fastapi
+    spec:
+      containers:
+      - name: api-container
+        image: ttl.sh/telepresence-demo-order-svc:2h
+        ports:
+        - name:  api
+          containerPort: 8080
+          protocol: TCP
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name:  apisvc
+  namespace: api
+spec:
+  selector:
+    app:  fastapi
+  type:  ClusterIP
+  ports:
+  - name: api
+    port:  80
+    targetPort:  8080
