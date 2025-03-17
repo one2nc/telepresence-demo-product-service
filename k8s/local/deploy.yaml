@@ -6,17 +6,17 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fastapi
+  name: product-svc
   namespace: api
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: fastapi
+      app: product-svc
   template:
     metadata:
       labels:
-        app: fastapi
+        app: product-svc
     spec:
       containers:
       - name: api-container
@@ -30,11 +30,11 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name:  apisvc
+  name:  product-svc
   namespace: api
 spec:
   selector:
-    app:  fastapi
+    app:  product-svc
   type:  ClusterIP
   ports:
   - name: api
