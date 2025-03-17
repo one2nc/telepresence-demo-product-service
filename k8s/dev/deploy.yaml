@@ -21,6 +21,7 @@ spec:
       containers:
       - name: api-container
         image: ttl.sh/telepresence-demo-product-svc:2h
+        imagePullPolicy: Always
         ports:
         - name:  api
           containerPort: 8080
