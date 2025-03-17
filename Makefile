@@ -1,4 +1,4 @@
-IMAGE := "ttl.sh/telepresence-demo-order-svc:2h"
+IMAGE := "ttl.sh/telepresence-demo-product-svc:2h"
 
 ## Install for production
 install:
