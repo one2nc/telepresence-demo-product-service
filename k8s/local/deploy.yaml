@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: api-container
-        image: ttl.sh/telepresence-demo-order-svc:2h
+        image: ttl.sh/telepresence-demo-product-svc:2h
         ports:
         - name:  api
           port:  8080
