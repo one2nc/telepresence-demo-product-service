@@ -21,7 +21,7 @@ def load_datastore():
 @app.get("/healthz", status_code=201)
 async def health():
     print("Hello")
-    return {"message": "Hi BoosterConf! from Products Service"}
+    return {"message": "Hello from Products Service!"}
 
 
 @app.get("/products", response_model=List[Product])
