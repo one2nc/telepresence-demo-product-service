@@ -1,0 +1,20 @@
+replicaCount: 3
+
+image:
+  repository: ttl.sh/telepresence-demo-product-svc
+  imagePullPolicy: Always
+  tag: 2h
+
+service: 
+  type: ClusterIP
+  targetPort: 8080
+  port: 80
+
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: 8080
+readinessProbe:
+  httpGet:
+    path: /healthz
+    port: 8080

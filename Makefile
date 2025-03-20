@@ -45,4 +45,6 @@ fix:
 deploy-dev: build-docker
 	kubectl apply -f ./k8s/dev
 
+deploy-dev-helm: build-docker 
+	helm upgrade --install -f ./k8s/helm/dev.values.yaml products-svc --namespace api --create-namespace ./k8s/helm/dev
 	
