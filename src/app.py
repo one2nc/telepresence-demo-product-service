@@ -20,8 +20,7 @@ def load_datastore():
 
 @app.get("/healthz", status_code=201)
 async def health():
-    print("Hello")
-    return {"message": "Hello from Products Service!"}
+    return {"message": "Hello from Products Service for a PR-review!"}
 
 
 @app.get("/products", response_model=List[Product])
