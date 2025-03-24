@@ -4,6 +4,7 @@ kind: Ingress
 metadata:
   name: {{ .Values.product.name }}-ingress
 spec:
+  ingressClassName: nginx
   rules:
     - host: {{ .Values.product.name }}-{{ .Values.product.branch }}-{{ .Values.product.prnumber }}.example.com
       http:
