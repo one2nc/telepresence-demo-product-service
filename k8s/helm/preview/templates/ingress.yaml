@@ -15,6 +15,6 @@ spec:
               service:
                 name: {{ .Values.product.branch }}-{{ .Values.product.prnumber }}-product-dev
                 port:
-                  number: 80
+                  number: 8080
 {{- end }}
 
