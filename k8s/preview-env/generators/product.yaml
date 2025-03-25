@@ -1,0 +1,50 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: preview-product
+spec:
+  generators:
+  - pullRequest:
+      github:
+        labels:
+        - preview
+        owner: one2nc
+        repo: telepresence-demo-product-service
+        tokenRef:
+          key: token
+          secretName: github-token
+      requeueAfterSeconds: 10
+  ignoreApplicationDifferences:
+  - jsonPointers:
+    - /spec/source/helm/parameters
+  template:
+    metadata:
+      labels:
+        env: preview
+      name: '{{branch}}-{{number}}-product'
+    spec:
+      destination:
+        namespace: product-{{branch}}-{{number}}
+        server: https://kubernetes.default.svc
+      project: default
+      source:
+        helm:
+          parameters:
+          - name: product.name
+            value: product
+          - name: product.branch
+            value: '{{branch}}'
+          - name: product.prnumber
+            value: '{{number}}'
+          - name: images.tag
+            value: '{{head_sha}}'
+        path: k8s/helm/preview
+        repoURL: git@github.com:one2nc/telepresence-demo-product-service.git
+        targetRevision: HEAD
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - FailOnSharedResource=false
+          - CreateNamespace=true
